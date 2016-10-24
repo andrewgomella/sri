@@ -1,0 +1,288 @@
+ record(bo, "$(P):ON") 
+ {
+    field(DESC, "X-ray on")
+    field(DTYP, "stream")
+    field(VAL, "0")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(FLNK, "$(P):TIMER")
+    field(OUT , "@devsri.proto setXR L0")
+ }
+
+record(calcout, "$(P):TIMER")
+{
+    field(DTYP, "stream")
+    field(PREC, "2")
+    field(INPA, "$(P):TIMER_RBV.VAL")
+    field(CALC, "A")
+    field(OOPT, "When Non-zero")
+    field(DOPT, "Use OCAL")
+    field(OVAL, "0")
+    field(OUT , "@devsri.proto setXR L0")
+} 
+
+record(bi, "$(P):TIMER_RBV")
+{
+   field(VAL, "0")
+   field(PINI, "YES")
+}
+
+record(bo, "$(P):WATCHDOG") 
+{
+    field(DESC, "Enable Watchdog timer")
+    field(DTYP, "stream")
+    field(OUT , "@devsri.proto setWDP L0")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(PINI, "YES")
+}
+ 
+record(bo, "$(P):FAULT_RESET") 
+{
+    field(DESC, "Fault Reset")
+    field(DTYP, "stream")
+    field(OUT , "@devsri.proto cmd(SETPA1) L0")
+}
+
+record(bo, "$(P):STANDBY") 
+{
+    field(DESC, "Enter Standby")
+    field(DTYP, "stream")
+    field(OUT , "@devsri.proto cmd(RESPA1) L0")
+}
+
+record (bi, "$(P):WATCHDOG_RBV")
+{
+    field (DESC, "Watchdog Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(WR) L0")
+    field (ZNAM, "OFF")
+    field (ONAM, "ON")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):READY_RBV")
+{
+    field (DESC, "Ready Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPA2) L0")
+    field (ZNAM, "No")
+    field (ONAM, "Yes")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):FIRING_RBV")
+{
+    field (DESC, "FIRING?")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPA3) L0")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):ARC_RBV")
+{
+    field (DESC, "ARC Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPA5) L0")
+    field (ZNAM, "No")
+    field (ONAM, "Yes")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):FAULT_RBV")
+{
+    field (DESC, "Fault Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPA4) L0")
+    field (ZNAM, "No")
+    field (ONAM, "Yes")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):OV_RBV")
+{
+    field (DESC, "Overvolt Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPA6) L0")
+    field (ZNAM, "No")
+    field (ONAM, "Yes")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):OC_RBV")
+{
+    field (DESC, "Overcurrent Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPA7) L0")
+    field (ZNAM, "No")
+    field (ONAM, "Yes")
+    field (SCAN, ".5 second")
+}
+
+record (bi, "$(P):OT_RBV")
+{
+    field (DESC, "Overtemp Status")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RPB0) L0")
+    field (ZNAM, "No")
+    field (ONAM, "Yes")
+    field (SCAN, ".5 second")
+}
+
+record (longin, "$(P):WATCHDOG_LENGTH_RBV")
+{
+    field (DESC, "WD Timer Length")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(PW) L0")
+    field (SCAN, ".5 second")
+}
+
+record (longout, "$(P):WATCHDOG_LENGTH")
+{
+    field (DESC, "WD Timer Length Set")
+    field (DTYP, "stream")
+    field (OUT,  "@devsri.proto setD(MW) L0")
+    field(HOPR, "255")
+    field(LOPR, "0")
+    field(EGU, "sec")
+}
+
+record (ao, "$(P):KVP")
+{
+    field (DESC, "Set kVp")
+    field (DTYP, "stream")
+    field (OUT,  "@devsri.proto setD(VA) L0")
+    field (PREC, "0")
+    field (LINR, "SLOPE")
+    field (ESLO, "0.019536") 
+    field (LOPR, "0")
+    field (HOPR, "80")
+    field (EGU,  "kVp")
+}
+
+record (ao, "$(P):UA")
+{
+    field (DESC, "Set uA")
+    field (DTYP, "stream")
+    field (OUT,  "@devsri.proto setD(VB) L0")
+    field (PREC, "0")
+    field (LINR, "SLOPE")
+    field (ESLO, "0.2442") 
+    field (LOPR, "0")
+    field (HOPR, "1000")
+    field (EGU,  "uA")
+}
+
+record (ai, "$(P):KVP_RBV")
+{
+    field (DESC, "Get kVp")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RD0) L0")
+    field (PREC, "0")
+    field (LINR, "SLOPE")
+    field (ESLO, ".019536") 
+    field (EGU,  "kVp")
+    field (SCAN, ".1 second")
+    field (FLNK, "$(P):CALC_WATT")
+}
+
+record (ai, "$(P):UA_RBV")
+{
+    field (DESC, "Get uA")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RD1) L0")
+    field (PREC, "0")	
+    field (LINR, "SLOPE")
+    field (ESLO, ".2442") 
+    field (EGU, "UA")
+    field (SCAN, ".1 second")
+    field (FLNK, "$(P):CALC_WATT")
+}
+
+# controlled via sequencer
+record (ai, "$(P):MS_RBV") 
+{
+    field (DESC, "Get Exposure time")
+    field (DTYP, "Soft Channel")
+    field (PREC, "9")   
+    field (EGU, "ms")
+}
+# controlled via sequencer
+record (ai, "$(P):MAS_RBV") 
+{
+    field (DESC, "Get mAs")
+    field (DTYP, "Soft Channel")
+    field (PREC, "9")   
+    field (EGU, "mAs")
+}
+
+record(calcout, "$(P):CALC_WATT") 
+{
+  field (INPA,"$(P):KVP_RBV")
+  field (INPB,"$(P):UA_RBV")
+  field (CALC, "A*B*1*10**(-3)")
+  field (OUT, "$(P):WATT_RBV.VAL")
+  field (OOPT,"Every Time")
+} 
+
+record(ai, "$(P):WATT_RBV")
+{
+  field (DESC, "Get Power")
+  field (DTYP, "Soft Channel")
+  field (INP, "$(P):CALC_WATT.VAL")
+  field (EGU, "W")
+  field (SCAN, ".1 second")
+}
+
+record (ai, "$(P):ILV_RBV")
+{
+    field (DESC, "Get Input Line Voltage")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RD2) L0")
+    field (PREC, "0")
+    field (LINR, "SLOPE")
+    field (ESLO, ".0079487") 
+    field (EGU,  "V")
+    field (SCAN, ".5 second")
+}
+
+record (ai, "$(P):INTV_RBV")
+{
+    field (DESC, "Get Interlock Voltage")
+    field (DTYP, "stream")
+    field (INP,  "@devsri.proto getD(RD3) L0")
+    field (PREC, "0")
+    field (LINR, "SLOPE")
+    field (ESLO, "0.003663") 
+    field (EGU,  "V")
+    field (SCAN, ".5 second")
+}
+
+# timer setting to kill flux if the xray is consistently firing
+record(ao, "$(P):AUTOKILL_LENGTH")
+{
+    field(DESC, "Set timer to autokill xray flux")
+    field(DTYP, "Soft Channel")
+    field(PREC, "0")
+    field(VAL, "30")
+    field(OUT, "$(P):AUTOKILL_LENGTH_RBV CA PP NMS")
+    field(PINI, "YES")
+}
+
+record(ai, "$(P):AUTOKILL_LENGTH_RBV") 
+{
+    field(DESC, "Get timer to autokill xray flux")
+    field(DTYP, "Soft Channel")
+    field(PREC, "0")
+    field(EGU, "sec")
+    field(SCAN, "Passive")
+}
+
+record(ai, "$(P):AUTOKILL_ELAPSED_RBV") 
+{
+    field(DESC, "Get elapsed time")
+    field(DTYP, "Soft Channel")
+    field(PREC, "0")
+    field(EGU, "sec")
+    field(SCAN, "1 second")
+}

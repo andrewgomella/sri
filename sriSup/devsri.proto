@@ -1,0 +1,46 @@
+#############################################
+getIDN {
+    out "*IDN?";
+    in "%\$1[^\r\n]";
+    ExtraInput = Ignore;
+}
+
+#############################################
+#Generic Commands 
+
+cmd {
+    out "\$1";
+}
+
+setD {
+    out "\$1%d";
+}
+
+getD {
+    out "\$1";
+    in "%d";
+}
+
+getS {
+     out "\$1";
+     in "%s";
+}
+
+#############################################
+#On/Off Switches
+
+#watchdog 
+setWDP {
+    out "%{WD|WE}";
+}
+
+#xray on/off and initial startup command
+setXR {
+    out "%{RESPA0|SETPA0}";
+    @init { out "CPA11111100 \r RESPA0 \r RESPA1"}
+	}
+
+#pulse mode
+setPON {
+    out "%{PD|PE}";
+}
