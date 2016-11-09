@@ -48,7 +48,7 @@ ifdef SNCSEQ
 	else 
 		$(PROD_IOC)_LIBS += seq pv
 	endif
-	$(PROD_IOC)_SRCS += oxford.st
+	$(PROD_IOC)_SRCS += sri.st
 endif
 ifdef CALC
 	$(PROD_IOC)_DBD += calcSupport.dbd
