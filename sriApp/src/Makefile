@@ -37,9 +37,18 @@ ifdef CAPUTLOG
 	$(PROD_IOC)_LIBS += caPutLog
 endif
 ifdef SNCSEQ
-	$(PROD_IOC)_DBD += devSequencer.dbd
-	$(PROD_IOC)_LIBS += seqDev seq pv
-	$(PROD_IOC)_SRCS += sri.st
+	# seq-2-1 and earlier has devSequencer
+	ifeq (seq-2-1, $(findstring seq-2-1, $(SNCSEQ)))
+		$(PROD_IOC)_DBD += devSequencer.dbd
+		$(PROD_IOC)_LIBS += seqDev seq pv
+	else ifeq (seq-2.1, $(findstring seq-2.1, $(SNCSEQ)))
+		$(PROD_IOC)_DBD += devSequencer.dbd
+		$(PROD_IOC)_LIBS += seqDev seq pv
+	# seq-2-2
+	else 
+		$(PROD_IOC)_LIBS += seq pv
+	endif
+	$(PROD_IOC)_SRCS += oxford.st
 endif
 ifdef CALC
 	$(PROD_IOC)_DBD += calcSupport.dbd
