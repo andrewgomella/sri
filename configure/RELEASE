@@ -19,22 +19,22 @@
 # Build settings that are NOT module paths should appear in a
 # CONFIG_SITE file.
 
-SYN_SUPPORT=/home/ipsuser/epics/support
+SUPPORT=/home/ipsuser/epics/support
 IPL_SUPPORT=
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
 # Define synApps support modules. 
-ASYN=$(SYN_SUPPORT)/asyn-4-26
-AUTOSAVE=$(SYN_SUPPORT)/autosave-5-7-1
-BUSY=$(SYN_SUPPORT)/busy-1-6-1
-CALC=$(SYN_SUPPORT)/calc-3-2
-CAPUTLOG=$(SYN_SUPPORT)/caPutLog-3-4
-DEVIOCSTATS=$(SYN_SUPPORT)/devIocStats-3-1-14
-IOCADMIN=$(SYN_SUPPORT)/devIocStats-3-1-14/iocAdmin
-SNCSEQ=$(SYN_SUPPORT)/seq-2-1-18
-SSCAN=$(SYN_SUPPORT)/sscan-2-10-1
-STD=$(SYN_SUPPORT)/std-3-4
-STREAM=$(SYN_SUPPORT)/stream-2-6
+ASYN=$(SUPPORT)/asyn-4-26
+AUTOSAVE=$(SUPPORT)/autosave-5-7-1
+BUSY=$(SUPPORT)/busy-1-6-1
+CALC=$(SUPPORT)/calc-3-2
+CAPUTLOG=$(SUPPORT)/caPutLog-3-4
+DEVIOCSTATS=$(SUPPORT)/devIocStats-3-1-14
+IOCADMIN=$(SUPPORT)/devIocStats-3-1-14/iocAdmin
+SNCSEQ=$(SUPPORT)/seq-2-1-18
+SSCAN=$(SUPPORT)/sscan-2-10-1
+STD=$(SUPPORT)/std-3-4
+STREAM=$(SUPPORT)/stream-2-6
 
 # EPICS_BASE usually appears last so other apps can preempt definitions
 EPICS_BASE=/home/ipsuser/epics/base

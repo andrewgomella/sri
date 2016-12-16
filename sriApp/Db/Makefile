@@ -11,6 +11,10 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
 #DB += xxx.db
+ifdef AUTOSAVE
+	$(PROD_IOC)_DBD += asSupport.dbd
+	$(PROD_IOC)_LIBS += autosave
+endif
 ifdef DEVIOCSTATS
 	DB_INSTALLS += $(DEVIOCSTATS)/db/iocAdminSoft.db
 endif
